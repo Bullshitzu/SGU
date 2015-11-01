@@ -3,10 +3,8 @@ using System.Collections;
 
 public class SystemGenerator {
 
-    public static void Generate () {
-
-        StarSystem a = new StarSystem();
-
+    public static StarSystem Generate () {
+        return new StarSystem();
     }
 
 
