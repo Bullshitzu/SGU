@@ -47,11 +47,14 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Resources\Scripts\Map\Planet.cs" />
+     <Compile Include="Assets\Resources\Scripts\Map\PlanetArchetypes.cs" />
      <Compile Include="Assets\Resources\Scripts\Map\ProceduralManager.cs" />
      <Compile Include="Assets\Resources\Scripts\Map\Star.cs" />
      <Compile Include="Assets\Resources\Scripts\Map\StarSystem.cs" />
      <Compile Include="Assets\Resources\Scripts\Map\SystemGenerator.cs" />
+     <Compile Include="Assets\Resources\Scripts\Menu\LoadManager.cs" />
      <Compile Include="Assets\Resources\Scripts\Menu\MainMenuManager.cs" />
+     <Compile Include="Assets\Resources\Scripts\Menu\SceneMessanger.cs" />
      <Compile Include="Assets\Resources\Scripts\Ship\Ship.cs" />
      <Compile Include="Assets\Resources\Scripts\Ship\ShipTile.cs" />
      <Compile Include="Assets\Resources\Scripts\Utility\DebugConsole.cs" />

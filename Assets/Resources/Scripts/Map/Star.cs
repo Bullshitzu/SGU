@@ -30,12 +30,12 @@ public class Star {
 
         float classChance = Random.Range(0f, 100f);
 
-        if (classChance < 0.03f) Class = StarClass.O;
-        else if (classChance < 0.13f) Class = StarClass.B;
-        else if (classChance < 0.6f) Class = StarClass.A;
-        else if (classChance < 3f) Class = StarClass.F;
-        else if (classChance < 7.6f) Class = StarClass.G;
-        else if (classChance < 12.1f) Class = StarClass.K;
+        if (classChance < 3f) Class = StarClass.O;
+        else if (classChance < 10) Class = StarClass.B;
+        else if (classChance < 20) Class = StarClass.A;
+        else if (classChance < 35) Class = StarClass.F;
+        else if (classChance < 50) Class = StarClass.G;
+        else if (classChance < 75) Class = StarClass.K;
         else Class = StarClass.M;
 
         switch (Class) {
@@ -79,8 +79,8 @@ public class Star {
         float a = Mathf.Clamp(20 - SolarMass, 5, 20) / 5f;
         SolarLuminosity = Mathf.Pow(SolarMass, a);
 
-        HabitableZoneCenter = 0.016f * Mathf.Pow((SurfaceTemperature/1000f), 2) + 0.28f * (SurfaceTemperature/1000f) - 0.79f;
-
+        HabitableZoneCenter = 0.016f * Mathf.Pow((SurfaceTemperature/1000f), 2) + 0.28f * (SurfaceTemperature/1000f);
+        if (HabitableZoneCenter < 0.1f) HabitableZoneCenter = 0.1f;
 
         Debug.Log(this.ToString());
     }

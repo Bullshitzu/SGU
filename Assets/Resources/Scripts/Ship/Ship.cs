@@ -9,7 +9,7 @@ public class Ship : MonoBehaviour {
 	
 	void Start () {
 		shipRef = this;
-		Tiles = new ShipTile[4096,4096];
+		//Tiles = new ShipTile[4096,4096];
 	}
 	
 	#region Tiling System

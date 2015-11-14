@@ -124,12 +124,14 @@ public class MainMenuManager : MonoBehaviour {
 		
 	}
 	private void LoadGame () {
+        SceneMessanger.action = SceneMessanger.Action.Load;
 		Application.LoadLevel("Game");
 	}
 	private void StartNewGame () {
 		if(Directory.Exists("Savegame")) Directory.Delete("Savegame");
 		Directory.CreateDirectory("Savegame");
-		
+
+        SceneMessanger.action = SceneMessanger.Action.New;
 		Application.LoadLevel("Game");
 	}
 	
