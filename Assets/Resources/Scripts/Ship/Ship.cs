@@ -35,6 +35,4 @@ public class Ship : MonoBehaviour {
 	#endregion
 	
 	
-	
-	
 }

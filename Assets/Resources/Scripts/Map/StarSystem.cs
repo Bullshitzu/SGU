@@ -22,23 +22,21 @@ public class StarSystem {
 
         //todo: check with gameLoadManager if this star system already exists (ie has been saved), if yes load seed
 
-        this._seed = Random.Range(int.MinValue, int.MaxValue);
+        this._seed = 634809511; // Random.Range(int.MinValue, int.MaxValue);
         Random.seed = _seed;
+
+        Debug.Log("Star system seed: " + this._seed);
 
         this.Star = new Star();
         Planets = new List<Planet>();
 
         int planetCount = Random.Range(0, 12);
 
-        // 0.2 - 20
-
-        // x^(1)  -  x^(1/2)
-
-
         float systemSize = Random.Range(5f, 15f);
         float internalDensityFactor = Random.Range(1.2f, 2.5f);
 
         List<float> planetDistances = new List<float>();
+        int[] planetSeeds = new int[planetCount];
 
         for (int i = 0; i < planetCount; i++) {
             float randFactor = (i + 1f) / planetCount;
@@ -47,14 +45,14 @@ public class StarSystem {
             dist += Random.Range(-randFactor, randFactor);
             dist *= systemSize;
             planetDistances.Add(dist+0.05f);
+
+            planetSeeds[i] = Random.Range(int.MinValue, int.MaxValue);
         }
 
         for (int i = 0; i < planetCount; i++) {
-            Planets.Add(new Planet(this, planetDistances[i]));
+            Planets.Add(new Planet(this, planetDistances[i], planetSeeds[i]));
         }
+
+        Random.seed = this.Seed;
     }
-
-    // Methods
-    
-
 }

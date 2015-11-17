@@ -4,6 +4,14 @@ using System.Collections.Generic;
 
 public class PlanetArchetypes {
 
+    public enum PlanetType {
+        BASE,
+        Lava,
+        Temperate,
+        Barren,
+        Ice
+    }
+
     public static Archetype[] Generate () {
         List<Archetype> temp = new List<Archetype>();
 
@@ -15,21 +23,33 @@ public class PlanetArchetypes {
         return temp.ToArray();
     }
 
-    public abstract class Archetype {
+    public class Archetype {
 
         public Archetype () {
-            Name = "BASE";
+            Type = PlanetType.BASE;
             TemperatureRange = new Vector2(0, 0); // kelvin
             AtmospherePressureRange = new Vector2(0, 2.5f); // bars
             DayLengthRange = new Vector2(5, 90); // minutes
             MassRange = new Vector2(0.2f, 2.5f);
+            ColorPalette = new Color[] {
+                new Color(0,0,0,1),
+                new Color(1,1,1,1)
+            };
         }
-        public string Name;
-        public abstract float GetOccuranceChanceAtDistance (float distance);
+        public PlanetType Type;
+        public virtual float GetOccuranceChanceAtDistance (float distance) { return 0; }
+        public virtual void SetNoiseGenerator (LibNoise.RidgedMultifractal Generator) {
+            Generator.Seed = Random.Range(int.MinValue, int.MaxValue);
+            Generator.OctaveCount = 5;
+            Generator.NoiseQuality = LibNoise.NoiseQuality.High;
+            Generator.Lacunarity = 1.4f;
+            Generator.Frequency = 6f;
+        }
         public Vector2 TemperatureRange;
         public Vector2 AtmospherePressureRange;
         public Vector2 DayLengthRange;
         public Vector2 MassRange;
+        public Color[] ColorPalette;
 
         // amount of resources range (each individually)
 
@@ -38,20 +58,28 @@ public class PlanetArchetypes {
     public class Lava : Archetype {
         public Lava ()
             : base() {
-            Name = "Lava";
+            Type = PlanetType.Lava;
             TemperatureRange = new Vector2(1100, 1500);
             AtmospherePressureRange = new Vector2(0.8f, 4f);
+            ColorPalette = new Color[] {
+                (Color) new Color32(15, 12, 7, 255),
+                (Color) new Color32(100, 80, 70, 255)
+            };
         }
         public override float GetOccuranceChanceAtDistance (float distance) {
             return Mathf.Clamp01(-4 * distance * distance + 1);
             // 0 = 1
             // 0.5 = 0
         }
+        public override void SetNoiseGenerator (LibNoise.RidgedMultifractal Generator) {
+            base.SetNoiseGenerator(Generator);
+            Generator.Lacunarity = 2f;
+        }
     }
     public class Temperate : Archetype {
         public Temperate ()
             : base() {
-            Name = "Temperate";
+            Type = PlanetType.Temperate;
             TemperatureRange = new Vector2(250, 330);
         }
         public override float GetOccuranceChanceAtDistance (float distance) {
@@ -64,7 +92,7 @@ public class PlanetArchetypes {
     public class Barren : Archetype {
         public Barren ()
             : base() {
-            Name = "Barren";
+            Type = PlanetType.Barren;
             TemperatureRange = new Vector2(150, 300);
         }
         public override float GetOccuranceChanceAtDistance (float distance) {
@@ -77,7 +105,7 @@ public class PlanetArchetypes {
     public class Ice : Archetype {
         public Ice ()
             : base() {
-            Name = "Ice";
+            Type = PlanetType.Ice;
             TemperatureRange = new Vector2(0, 50);
             AtmospherePressureRange = new Vector2(0, 0.5f);
         }
@@ -88,5 +116,4 @@ public class PlanetArchetypes {
             // 6.5 = 1
         }
     }
-
 }

@@ -59,11 +59,14 @@
      <Compile Include="Assets\Resources\Scripts\Ship\ShipTile.cs" />
      <Compile Include="Assets\Resources\Scripts\Utility\DebugConsole.cs" />
      <Compile Include="Assets\Resources\Scripts\Utility\ErrorLogger.cs" />
-     <Compile Include="Assets\Resources\Scripts\Utility\Noise.cs" />
+     <Compile Include="Assets\Resources\Scripts\Utility\TextureHelper.cs" />
      <Compile Include="Assets\Resources\Scripts\Utility\UnitHelper.cs" />
      <Compile Include="Assets\Resources\Scripts\Utility\Version.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
+ </Reference>
+ <Reference Include="NoiseLib">
+ <HintPath>F:/SGU/Assets/Resources/Scripts/Utility/NoiseLib.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
