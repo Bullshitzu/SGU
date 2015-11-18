@@ -22,7 +22,9 @@ public class StarSystem {
 
         //todo: check with gameLoadManager if this star system already exists (ie has been saved), if yes load seed
 
-        this._seed = 634809511; // Random.Range(int.MinValue, int.MaxValue);
+        this._seed = 634809511; 
+        // Random.Range(int.MinValue, int.MaxValue); 
+        // 634809511 
         Random.seed = _seed;
 
         Debug.Log("Star system seed: " + this._seed);

@@ -37,9 +37,7 @@ public class Planet {
 
         this.textureDiffuse = GeneratePlanetDiffuseMap(this.Blueprint, this.Heightmap);
         this.textureIllumination = GeneratePlanetIlluminationMap(this.Blueprint, this.Heightmap);
-        this.textureNormal = Utility.TextureHelper.GreyscaleToNormal(Heightmap);
-
-        // add water to diffuse/specular
+        this.textureNormal = GeneratePlanetNormalmap(this.Blueprint, this.Heightmap);
 
         GeneratePlanetResources(this.Blueprint);
 
@@ -80,7 +78,7 @@ public class Planet {
         this.DayLength = Random.Range(blueprint.DayLengthRange.x, blueprint.DayLengthRange.y);
         this.AtmosphereDensity = Random.Range(blueprint.AtmospherePressureRange.x, blueprint.AtmospherePressureRange.y);
     }
-    private Texture2D GeneratePlanetHeightmap (PlanetArchetypes.Archetype blueprint) {
+    private static Texture2D GeneratePlanetHeightmap (PlanetArchetypes.Archetype blueprint) {
 
         /*
          * SeamlessNoise( float x, float y, float dx, float dy, float xyOffset );
@@ -108,7 +106,7 @@ public class Planet {
         temp.Apply();
         return temp;
     }
-    private float[] GeneratePlanetHeightmapData (PlanetArchetypes.Archetype blueprint) {
+    private static float[] GeneratePlanetHeightmapData (PlanetArchetypes.Archetype blueprint) {
 
         float[] height = new float[textureSize * textureSize];
 
@@ -155,7 +153,32 @@ public class Planet {
 
         return height;
     }
-    private Texture2D GeneratePlanetDiffuseMap (PlanetArchetypes.Archetype blueprint, Texture2D heightmap) {
+    private static Texture2D GeneratePlanetNormalmap (PlanetArchetypes.Archetype blueprint, Texture2D heightmap) {
+
+        if (blueprint.Type == PlanetArchetypes.PlanetType.Ice) {
+
+            Color[] pixelsHeightmap = heightmap.GetPixels();
+            Color[] pixels = new Color[pixelsHeightmap.Length];
+
+            for (int y = 0; y < textureSize; y++) {
+                for (int x = 0; x < textureSize; x++) {
+                    float v = pixelsHeightmap[x + y * textureSize].grayscale;
+                    v = Mathf.Clamp01(-2.38f * Mathf.Pow(v, 2) + 3.38f * v);
+                    pixels[x + y * textureSize] = new Color(v, v, v, 1);
+                }
+            }
+
+            Texture2D temp = new Texture2D(textureSize, textureSize);
+            temp.SetPixels(pixels);
+            temp.filterMode = FilterMode.Point;
+            temp.Apply();
+
+            return Utility.TextureHelper.GreyscaleToNormal(temp);
+        }
+
+        return Utility.TextureHelper.GreyscaleToNormal(heightmap);
+    }
+    private static Texture2D GeneratePlanetDiffuseMap (PlanetArchetypes.Archetype blueprint, Texture2D heightmap) {
         //todo: this
 
         Color[] palette = blueprint.ColorPalette;
@@ -171,6 +194,29 @@ public class Planet {
             }
         }
 
+        if (blueprint.Type == PlanetArchetypes.PlanetType.Temperate) {
+            for (int y = 0; y < textureSize; y++) {
+                for (int x = 0; x < textureSize; x++) {
+
+                    v = pixelsHeightmap[x + y * textureSize].grayscale;
+                    float h = v;
+                    v = 1 - Mathf.Clamp01((v - 0.35f) * 5);
+
+                    Color tempColor = Color.Lerp(pixels[x + y * textureSize], new Color32(11, 36, 56, 255), v);
+
+                    if (!blueprint.HasPoleColor()) {
+                        pixels[x + y * textureSize] = tempColor;
+                        continue;
+                    }
+
+                    float poleMult = (float)y / textureSize;
+                    poleMult = Mathf.Clamp01(6.25f * Mathf.Pow(poleMult, 2) - 6.25f * poleMult + 1);
+
+                    pixels[x + y * textureSize] = Color.Lerp(tempColor, blueprint.PolesColor, poleMult+h-0.6f);
+                }
+            }
+        }
+
         Texture2D temp = new Texture2D(textureSize, textureSize);
         temp.SetPixels(pixels);
         temp.filterMode = FilterMode.Point;
@@ -179,7 +225,7 @@ public class Planet {
 
         return temp;
     }
-    private Texture2D GeneratePlanetIlluminationMap (PlanetArchetypes.Archetype blueprint, Texture2D heightmap) {
+    private static Texture2D GeneratePlanetIlluminationMap (PlanetArchetypes.Archetype blueprint, Texture2D heightmap) {
 
         switch (blueprint.Type) {
             case PlanetArchetypes.PlanetType.Lava:
@@ -209,7 +255,7 @@ public class Planet {
                 return null;
         }
     }
-    private void GeneratePlanetResources (PlanetArchetypes.Archetype blueprint) {
+    private static void GeneratePlanetResources (PlanetArchetypes.Archetype blueprint) {
         // todo: generate resource maps based on blueprint
     }
 

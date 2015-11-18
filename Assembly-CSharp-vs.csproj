@@ -57,6 +57,7 @@
      <Compile Include="Assets\Resources\Scripts\Menu\SceneMessanger.cs" />
      <Compile Include="Assets\Resources\Scripts\Ship\Ship.cs" />
      <Compile Include="Assets\Resources\Scripts\Ship\ShipTile.cs" />
+     <Compile Include="Assets\Resources\Scripts\TEMP\sun.cs" />
      <Compile Include="Assets\Resources\Scripts\Utility\DebugConsole.cs" />
      <Compile Include="Assets\Resources\Scripts\Utility\ErrorLogger.cs" />
      <Compile Include="Assets\Resources\Scripts\Utility\TextureHelper.cs" />
