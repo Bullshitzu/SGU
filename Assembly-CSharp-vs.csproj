@@ -46,23 +46,47 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Resources\Scripts\AssetDatabase.cs" />
+     <Compile Include="Assets\Resources\Scripts\AssetDatabaseHelpers.cs" />
+     <Compile Include="Assets\Resources\Scripts\Construction\Blueprint.cs" />
+     <Compile Include="Assets\Resources\Scripts\Construction\Constructable.cs" />
+     <Compile Include="Assets\Resources\Scripts\Construction\ConstructionManager.cs" />
+     <Compile Include="Assets\Resources\Scripts\Construction\Resource.cs" />
      <Compile Include="Assets\Resources\Scripts\Map\Planet.cs" />
      <Compile Include="Assets\Resources\Scripts\Map\PlanetArchetypes.cs" />
      <Compile Include="Assets\Resources\Scripts\Map\ProceduralManager.cs" />
      <Compile Include="Assets\Resources\Scripts\Map\Star.cs" />
      <Compile Include="Assets\Resources\Scripts\Map\StarSystem.cs" />
      <Compile Include="Assets\Resources\Scripts\Map\SystemGenerator.cs" />
-     <Compile Include="Assets\Resources\Scripts\Menu\LoadManager.cs" />
+     <Compile Include="Assets\Resources\Scripts\Map\World\Floor.cs" />
+     <Compile Include="Assets\Resources\Scripts\Menu\LoadScreen.cs" />
      <Compile Include="Assets\Resources\Scripts\Menu\MainMenuManager.cs" />
      <Compile Include="Assets\Resources\Scripts\Menu\SceneMessanger.cs" />
+     <Compile Include="Assets\Resources\Scripts\Parser\Parser.cs" />
+     <Compile Include="Assets\Resources\Scripts\Parser\ParserContext.cs" />
+     <Compile Include="Assets\Resources\Scripts\Parser\ParserExceptions.cs" />
+     <Compile Include="Assets\Resources\Scripts\Parser\ParserLines.cs" />
+     <Compile Include="Assets\Resources\Scripts\Parser\ParserLogger.cs" />
+     <Compile Include="Assets\Resources\Scripts\Parser\ParserObject.cs" />
+     <Compile Include="Assets\Resources\Scripts\Parser\ParserTypes\FloorParser.cs" />
+     <Compile Include="Assets\Resources\Scripts\Parser\ParserTypes\ShipTileParser.cs" />
+     <Compile Include="Assets\Resources\Scripts\Parser\Utility\IParentObject.cs" />
+     <Compile Include="Assets\Resources\Scripts\Parser\Utility\MeshHelper.cs" />
+     <Compile Include="Assets\Resources\Scripts\Parser\Utility\ParserHelper.cs" />
      <Compile Include="Assets\Resources\Scripts\Ship\Ship.cs" />
-     <Compile Include="Assets\Resources\Scripts\Ship\ShipTile.cs" />
+     <Compile Include="Assets\Resources\Scripts\Ship\ShipTilePrefab.cs" />
+     <Compile Include="Assets\Resources\Scripts\TEMP\TEST.cs" />
      <Compile Include="Assets\Resources\Scripts\TEMP\sun.cs" />
-     <Compile Include="Assets\Resources\Scripts\Utility\DebugConsole.cs" />
-     <Compile Include="Assets\Resources\Scripts\Utility\ErrorLogger.cs" />
+     <Compile Include="Assets\Resources\Scripts\Utility\CountingReader.cs" />
+     <Compile Include="Assets\Resources\Scripts\Utility\ErrorHandling\DebugConsole.cs" />
+     <Compile Include="Assets\Resources\Scripts\Utility\ErrorHandling\ErrorLogger.cs" />
      <Compile Include="Assets\Resources\Scripts\Utility\TextureHelper.cs" />
      <Compile Include="Assets\Resources\Scripts\Utility\UnitHelper.cs" />
      <Compile Include="Assets\Resources\Scripts\Utility\Version.cs" />
+     <None Include="Assets\Resources\Graphics\Shaders\FirstPass.shader" />
+     <None Include="Assets\Resources\Prefabs\Ship\floor1.txt" />
+     <None Include="Assets\Resources\Graphics\Shaders\Standard-FirstPass.shader" />
+     <None Include="Assets\Resources\Graphics\Shaders\Standard-Base.shader" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

@@ -1,0 +1,8 @@
+something = 5
+somethingElse (
+somethingElse [
+// comment above an empty line
+
+errorLine
+otherStuff = 6
+moreStuff (
